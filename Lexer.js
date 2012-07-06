@@ -3,20 +3,20 @@
  */
 var exports = module.exports;
 
-exports.Lexer = function(){
+exports.Lexer = (function(){
     var thisLexer = this || {};
-    var EOF = String.fromCharCode(-1);
-    var EOF_TYPE = 1;
-    String input;
-    var p = 0;
-    var c;
+    thisLexer.EOF = String.fromCharCode(-1);
+    thisLexer.EOF_TYPE = 1;
+    thisLexer.input;
+    thisLexer.p = 0;
+    thisLexer.c = thisLexer.EOF;
     
-    function constructor(input){
+    thisLexer.constructor = function constructor(input){
         thisLexer.input = input;
-        c = input.charAt(p);
+        thisLexer.c = input.charAt(p);
     }
     
-    function consume(){
+    thisLexer.consume = function consume(){
         p++;
         if (p >= input.length) {
             c = EOF;
@@ -25,7 +25,7 @@ exports.Lexer = function(){
         }
     }
 
-    function match(x) {
+    thisLexer.match = function match(x) {
         if (c == x) {
             consume();
         } else {
@@ -33,16 +33,8 @@ exports.Lexer = function(){
         }
     }
     
-    function nextToken(){};
-    function getTokenName(tokenType){};
+    thisLexer.nextToken = function nextToken(){};
+    thisLexer.getTokenName = function getTokenName(tokenType){};
     
-    return {
-        EOF : EOF,
-        EOF_TYPE : EOF_TYPE,
-        constructor : constructor,
-        consume : consume,
-        match : match,
-        nextToken : nextToken,
-        getTokenName : getTokenName
-    };
-};
+    return thisLexer;
+})();

@@ -1,12 +1,13 @@
 /**
  * @author yelp
  */
-var Lexer = require('Lexer').Lexer;
+var Lexer = require('./Lexer').Lexer;
+var Token = require('./Token').Token;
 var exports = module.exports;
 
 exports.ListLexer = function() {
     var thisLexer = this || {};
-    thisLexer.prototype = new Lexer();
+    thisLexer.prototype = Lexer;
     var NAME = 2;
     var COMMA = 3;
     var LBRACK = 4;
@@ -66,6 +67,8 @@ exports.ListLexer = function() {
     }
 
     return {
+        tempProperty : 1,
+        prototype : Lexer,
         NAME : NAME,
         COMMA : COMMA,
         LBRACK : LBRACK,
@@ -73,6 +76,6 @@ exports.ListLexer = function() {
         tokenNames : tokenNames,
         constructor : constructor,
         getTokenName : getTokenName,
-        nextToken : thisLexer.nextToken
+        nextToken : nextToken
     };
 };

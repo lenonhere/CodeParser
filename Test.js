@@ -1,14 +1,20 @@
 /**
  * @author yelp
  */
-var ListLexer = require('ListLexer').ListLexer;
-var Token = require('Token').Token;
+var Lexer = require('./Lexer').Lexer;
+var ListLexer = require('./ListLexer').ListLexer;
+var Token = require('./Token').Token;
 
-var lexer = new ListLexer(args[0]);
-var t = lexer.nextToken();
-while (t.type != Lexer.EOF_TYPE) {
-    console.log(t);
-    t = lexer.nextToken();
+//var lexer = Lexer;
+var lexer = new ListLexer(arguments[0]);
+for(i in lexer){
+ console.log(i + ' : ' + lexer.i);//i就是test的属性名
 }
-console.log(t);
+//var t = lexer.nextToken();
+//while (t.type != Lexer.EOF_TYPE) {
+//    console.log(t);
+//    t = lexer.nextToken();
+//}
+
+//console.log(t);
 // EOF

@@ -1,7 +1,7 @@
 /**
  * @author yelp
  */
-var ListLexer = require('ListLexer').ListLexer;
+var ListLexer = require('./ListLexer').ListLexer;
 var exports = module.exports;
 
 exports.Token = function(){
