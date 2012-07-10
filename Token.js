@@ -1,27 +1,21 @@
 /**
  * @author yelp
  */
-var ListLexer = require('./ListLexer').ListLexer;
+var Util = require('./Util').Util;
 var exports = module.exports;
 
-exports.Token = function(){
-    var type, text;
-    var thisToken = this || {};
-    
-    function constructor(type, text){
-        thisToken.type = type;
-        thisToken.text = text;
-    };
-    
-    function toString(){
-        var tname = ListLexer.tokenNames[type];
-        return "<'"+text+"',"+tname+">";
+function toString() {
+    var tname = Util.tokenNames[this.type];
+    return "<'" + this.text + "'," + tname + ">";
+}
+
+function Token(type, text) {
+    this.type = type;
+    this.text = text;
+
+    if (!this.hasOwnProperty(toString) || ('function' != typeof this.toString)) {
+        Token.prototype.toString = toString;
     }
-    
-    return {
-      type : type,
-      text : text,
-      constructor : constructor,
-      toString : toString  
-    };
-};
+}
+
+exports.Token = Token;

@@ -3,38 +3,52 @@
  */
 var exports = module.exports;
 
-exports.Lexer = (function(){
-    var thisLexer = this || {};
-    thisLexer.EOF = String.fromCharCode(-1);
-    thisLexer.EOF_TYPE = 1;
-    thisLexer.input;
-    thisLexer.p = 0;
-    thisLexer.c = thisLexer.EOF;
-    
-    thisLexer.constructor = function constructor(input){
-        thisLexer.input = input;
-        thisLexer.c = input.charAt(p);
-    }
-    
-    thisLexer.consume = function consume(){
-        p++;
-        if (p >= input.length) {
-            c = EOF;
-        } else {
-            c = input.charAt(p);
-        }
-    }
+var EOF = String.fromCharCode(-1);
+var EOF_TYPE = 1;
+//var input;
+//var p = 0;
+//var c = EOF;
 
-    thisLexer.match = function match(x) {
-        if (c == x) {
-            consume();
-        } else {
-            throw ("expecting " + x + "; found " + c);
-        }
+function consume() {
+    this.p++;
+    if (this.p >= this.input.length) {
+        this.c = EOF;
+    } else {
+        this.c = this.input.charAt(this.p);
     }
+}
+
+function match(x) {
+    if (this.c == x) {
+        consume();
+    } else {
+        throw ("expecting " + x + "; found " + this.c);
+    }
+}
+
+function nextToken() {
+}
+
+function getTokenName(tokenType) {
+}
+
+function sayPandplus(){
+    console.log(this.p);
+    this.p++;
+}
+
+function Lexer(input){
+    this.p = 0;
+    this.input = input;
+    this.c = input.charAt(this.p);
     
-    thisLexer.nextToken = function nextToken(){};
-    thisLexer.getTokenName = function getTokenName(tokenType){};
-    
-    return thisLexer;
-})();
+    if('function' != typeof this.consume){
+        Lexer.prototype.consume = consume;
+        Lexer.prototype.match = match;
+        Lexer.prototype.nextToken = nextToken;
+        Lexer.prototype.getTokenName = getTokenName;
+        Lexer.prototype.sayPandplus = sayPandplus;
+    }
+}
+
+exports.Lexer = Lexer;

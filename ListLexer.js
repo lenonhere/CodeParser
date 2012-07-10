@@ -1,36 +1,34 @@
 /**
  * @author yelp
  */
+var Util = require('./Util').Util;
 var Lexer = require('./Lexer').Lexer;
 var Token = require('./Token').Token;
 var exports = module.exports;
 
 exports.ListLexer = function() {
-    var thisLexer = this || {};
-    thisLexer.prototype = Lexer;
-    var NAME = 2;
-    var COMMA = 3;
-    var LBRACK = 4;
-    var RBRACK = 5;
-    var tokenNames = ["n/a", "<EOF>", "NAME", "COMMA", "LBRACK", "RBRACK"];
+    var thisLexer = this;;
+    //thisLexer.prototype = Lexer;
+    Util.inheritPrototype();
+    thisLexer.NAME = 2;
+    thisLexer.COMMA = 3;
+    thisLexer.LBRACK = 4;
+    thisLexer.RBRACK = 5;
+    thisLexer.tokenNames = Util.tokenNames;
 
-    function constructor(input) {
+    thisLexer.constructor = function constructor(input) {
         thisLexer.prototype.constructor(input);
     }
 
-    function getTokenName(x) {
+    thisLexer.getTokenName = function getTokenName(x) {
         return tokenNames[x];
     }
 
-    function isLETTER() {
+    thisLexer.isLETTER = function isLETTER() {
         return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
     }
 
-    function WS() {
-        while (c == ' ' || c == '\t' || c == '\n' || c == '\r')consume();
-    }
-
-    function nextToken() {
+    thisLexer.nextToken = function nextToken() {
         while (c != EOF) {
             switch(c) {
                 case ' ':
@@ -64,6 +62,10 @@ exports.ListLexer = function() {
             consume();
         } while ( isLETTER() );
         return new Token(NAME, buf.toString());
+    }
+
+    function WS() {
+        while (c == ' ' || c == '\t' || c == '\n' || c == '\r')consume();
     }
 
     return {
