@@ -1,42 +1,52 @@
 /**
  * @author yelp
  */
-var Util = require('./Util').Util;
-var Lexer = require('./Lexer').Lexer;
+var util = require('util');
+var MyUtil = require('./MyUtil').MyUtil;
+//var Lexer = require('./Lexer').Lexer;
 var ListLexer = require('./ListLexer').ListLexer;
 var Token = require('./Token').Token;
 
-var lexer = new Lexer('[ java ]');
-//var lexer = new ListLexer(arguments[0]);
-//var lexer2 = new Lexer('[ dotnet ]');
-var token = new Token(0, 'empty');
 console.log('test is beginning...');
-/*
-for(var i in lexer){
-    console.log(i + ' : ' + lexer[i]);//i就是test的属性名
-}
-console.log('lexer == lexer2 ? ' + (lexer == lexer2));
-for(var i in lexer){
-    console.log('lexer['+ i + '] === lexer2['+ i + '] ? ' + (lexer[i] === lexer2[i]));
-    console.log('lexer hasOwnProperty >> ' + i + ' << : ' + lexer.hasOwnProperty(i));
-}
-for(var i=0,j=10; i<j; i++){
-  lexer.sayPandplus();
-  lexer2.sayPandplus();
-};
-debugger;
-for(var i in Util){
-    console.log(i + ' : ' + Util[i]);
-}
-*/
-Util.printProperties(token);
-//console.log('p is : >> ' + lexer.p +' <<');
-//var t = lexer.nextToken();
-//while (t.type != Lexer.EOF_TYPE) {
-//    console.log(t);
-//    t = lexer.nextToken();
-//}
 
-//console.log(t);
-// EOF
+function SuperType(name){
+    this.name = name;
+    this.colors = ["red", "blue", "yellow"];
+}
+
+SuperType.prototype.sayName = function(){
+    console.log(this.name);
+}
+
+SuperType.KEY = "Super";
+
+function SubType(name, age){
+    SuperType.call(this, name);
+    this.age = age;
+}
+
+//util.inherits(SubType, SuperType);
+MyUtil.inheritPrototype(SubType, SuperType);
+
+SubType.prototype.sayAge = function(){
+    console.log(this.age);
+    console.log("SuperType.KEY : " + SuperType.KEY);
+}
+
+var sub = new SubType("lenon", 2)
+
+//console.log(util.inspect(SubType, true, 6, true));return;
+console.log(util.inspect(sub, true, 6, true));return;
+
+console.log('inspect >> sub << ');
+console.log(util.inspect(sub, true, 4, true));
+
+console.log('inspect >> SuperType.prototype << ');
+console.log(util.inspect(SuperType.prototype, true, 4, true));
+
+console.log('inspect >> SubType.prototype << ');
+console.log(util.inspect(SubType.prototype, true, 4, true));
+
+sub.sayName();
+sub.sayAge();
 console.log('test ended...');

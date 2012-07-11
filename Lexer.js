@@ -11,6 +11,7 @@ var EOF_TYPE = 1;
 
 function consume() {
     this.p++;
+//    console.log("p : " + this.p);
     if (this.p >= this.input.length) {
         this.c = EOF;
     } else {
@@ -20,7 +21,7 @@ function consume() {
 
 function match(x) {
     if (this.c == x) {
-        consume();
+        this.consume();
     } else {
         throw ("expecting " + x + "; found " + this.c);
     }
@@ -43,6 +44,8 @@ function Lexer(input){
     this.c = input.charAt(this.p);
     
     if('function' != typeof this.consume){
+        Lexer.prototype.EOF = EOF;
+        Lexer.prototype.EOF_TYPE = EOF_TYPE;
         Lexer.prototype.consume = consume;
         Lexer.prototype.match = match;
         Lexer.prototype.nextToken = nextToken;

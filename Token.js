@@ -1,11 +1,11 @@
 /**
  * @author yelp
  */
-var Util = require('./Util').Util;
+var MyUtil = require('./MyUtil').MyUtil;
 var exports = module.exports;
 
 function toString() {
-    var tname = Util.tokenNames[this.type];
+    var tname = MyUtil.tokenNames[this.type];
     return "<'" + this.text + "'," + tname + ">";
 }
 
