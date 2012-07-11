@@ -51,7 +51,7 @@ function NameToken() {
         buf.push(this.c);
         this.consume();
     } while ( this.isLETTER() );
-    return new Token(this.NAME, buf.toString());
+    return new Token(this.NAME, buf.join(''));
 }
 
 function WS() {

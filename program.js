@@ -23,20 +23,20 @@ var lexer = new ListLexer(process.argv[2]);
 console.log('test is beginning...');
 /*
 for(var i in lexer){
-    console.log(i + ' : ' + lexer[i]);//i就是test的属性名
+console.log(i + ' : ' + lexer[i]);//i就是test的属性名
 }
 console.log('lexer == lexer2 ? ' + (lexer == lexer2));
 for(var i in lexer){
-    console.log('lexer['+ i + '] === lexer2['+ i + '] ? ' + (lexer[i] === lexer2[i]));
-    console.log('lexer hasOwnProperty >> ' + i + ' << : ' + lexer.hasOwnProperty(i));
+console.log('lexer['+ i + '] === lexer2['+ i + '] ? ' + (lexer[i] === lexer2[i]));
+console.log('lexer hasOwnProperty >> ' + i + ' << : ' + lexer.hasOwnProperty(i));
 }
 for(var i=0,j=10; i<j; i++){
-  lexer.sayPandplus();
-  lexer2.sayPandplus();
+lexer.sayPandplus();
+lexer2.sayPandplus();
 };
 debugger;
 for(var i in MyUtil){
-    console.log(i + ' : ' + MyUtil[i]);
+console.log(i + ' : ' + MyUtil[i]);
 }
 */
 //MyUtil.printProperties(token);
@@ -44,14 +44,19 @@ for(var i in MyUtil){
 //MyUtil.printProperties(lexer);
 //console.log(MyUtil.tokenNames[1]);
 //console.log(util.inspect(ListLexer, true, 4, true));return;
-var t = lexer.nextToken();
-while (t.type != lexer.EOF_TYPE) {
+//var t = lexer.nextToken();
+//while (t.type != lexer.EOF_TYPE) {
 //    console.log("t.type : " + t.type);
 //    console.log("ListLexer.EOF_TYPE : " + ListLexer.EOF_TYPE);
-    console.log(t.toString());
+//    console.log(t.toString());
+//    t = lexer.nextToken();
+//}
+var t;
+do {
     t = lexer.nextToken();
-}
+    console.log(t.toString());
+} while(t.type != lexer.EOF_TYPE);
 
-console.log(t.toString());
+//console.log(t.toString());
 // EOF
-console.log('test ended...');
+console.log('test ended...'); 
