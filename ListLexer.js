@@ -36,7 +36,7 @@ function nextToken() {
             default:
                 if (this.isLETTER())
                     return this.NameToken();
-                throw ("invalid character: " + c);
+                throw ("invalid character: >> " + this.c + " <<");
         }
     }
 //    console.log('inspect >> Lexer << ');
